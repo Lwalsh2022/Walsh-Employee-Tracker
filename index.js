@@ -132,11 +132,12 @@ const viewRoles = () => {
     const addRole = () => {
         inquirer.prompt(
 
-            {
+            [{
                 name: 'newRole',
                 type: 'input',
                 message: 'What is the name of the new role?'
             },
+            
             {
                 name: 'newSalary',
                 type: 'input',
@@ -146,7 +147,7 @@ const viewRoles = () => {
                 name: 'newDepartment',
                 type: 'input',
                 message: 'What department does this role belong to?'
-            }
+            }]
         )
         .then((userResponse) => {
             connection.query(`INSERT INTO roles (title, salary, department_id) VALUES ('${userResponse.newRole}', '${userResponse.newSalary}', '${userResponse.newDepartment}')`,
@@ -164,7 +165,7 @@ const viewRoles = () => {
 // make a function to add an employee
     const addEmployee = () => {
         inquirer.prompt(
-            {
+            [{
                 name: 'newEmployee',
                 type: 'input',
                 message: 'What is the name of the new employee?'
@@ -178,9 +179,10 @@ const viewRoles = () => {
                 name: 'newManager',
                 type: 'input',
                 message: 'Who is the manager of the new employee?'
-            }
+            }]
         )
         .then((userResponse) => {
+            console.log(userResponse)
             connection.query(`INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('${userResponse.newEmployee}', '${userResponse.newRole}', '${userResponse.newManager}')`,
             (err, response) => {
                 if (response) {
